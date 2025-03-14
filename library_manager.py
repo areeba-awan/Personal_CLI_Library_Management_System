@@ -74,7 +74,7 @@ def display_statistics(library):
 def main():
     library = load_library()
     while True:
-        print("\n📚📖 Welcome to the Library Management System 📘")
+        print("\n\t📖 Welcome to the Library Management System 📘")
         print("\n :Menu:")
         print("\n1️⃣   Add a book")
         print("2️⃣   Remove a book")
@@ -102,3 +102,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+

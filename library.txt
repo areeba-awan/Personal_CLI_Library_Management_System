@@ -1,1 +1,24 @@
-[{"title": "personal library manager", "author": "areeba awan", "year": 2025, "genre": "1st", "read": true}, {"title": "giaic", "author": "zia khan", "year": 2024, "genre": "1st", "read": false}, {"title": "Peer e Kamil", "author": "Nimra ahmed", "year": "2024", "genre": "coding", "read": true}, {"title": "Peer e Kamil", "author": "Nimra", "year": "2024", "genre": "coding", "read": false}]
+
+[
+    {
+        "Title": "The Great Gatsby",
+        "Author": "F. Scott Fitzgerald",
+        "Year": 1925,
+        "Genre": "fiction",
+        "Read": true
+    },
+    {
+        "Title": "Pride and Prejudice",
+        "Author": "Jane Austen",
+        "Year": 1813,
+        "Genre": "romance",
+        "Read": false
+    },
+    {
+        "Title": "Python Crash Course",
+        "Author": "Areeba",
+        "Year": 2024,
+        "Genre": "Coding",
+        "Read": true
+    }
+]

@@ -1,35 +1,24 @@
+
 [
     {
-      "title":"pyhton crash course",
-      "author": "Eric Matthes",
-      "publication_year": 2019,
-      "genre":"Programming",
-      "read_status": false,
-      "added_data": "2025-03-11 11:36:40"
+        "Title": "The Great Gatsby",
+        "Author": "F. Scott Fitzgerald",
+        "Year": 1925,
+        "Genre": "fiction",
+        "Read": true
     },
     {
-      "title":"Automate the boring stuff with python",
-      "author": "Fiza Sagar",
-      "publication_year": 2011,
-      "genre":"Programming",
-      "read_status": true,
-      "added_data": "2025-03-11 11:45:80"
+        "Title": "Pride and Prejudice",
+        "Author": "Jane Austen",
+        "Year": 1813,
+        "Genre": "romance",
+        "Read": false
     },
     {
-      "title":"Fluent Python",
-      "author": "Ramalho",
-      "publication_year": 2022,
-      "genre":"Programming",
-      "read_status": false,
-      "added_data": "2025-03-11 11:55:20"
-    },
-    {    
-      "title":"Effective Python",
-      "author": "Brett Slatkin",
-      "publication_year": 2020,
-      "genre":"Programming",
-      "read_status": true,
-      "added_data": "2025-03-11 11:58:10"
-      
+        "Title": "Python Crash Course",
+        "Author": "Areeba",
+        "Year": 2024,
+        "Genre": "Coding",
+        "Read": true
     }
-  ]
+]
