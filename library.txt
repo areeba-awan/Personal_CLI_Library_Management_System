@@ -1,24 +1,37 @@
-
 [
     {
-        "Title": "The Great Gatsby",
-        "Author": "F. Scott Fitzgerald",
-        "Year": 1925,
-        "Genre": "fiction",
-        "Read": true
+        "title": "Namal",
+        "author": "Nimrah ahmed",
+        "year": 2023,
+        "genre": "fiction",
+        "read": true
     },
     {
-        "Title": "Pride and Prejudice",
-        "Author": "Jane Austen",
-        "Year": 1813,
-        "Genre": "romance",
-        "Read": false
+        "title": "Haalim",
+        "author": "Nimrah ahmed",
+        "year": 2022,
+        "genre": "fiction",
+        "read": true
     },
     {
-        "Title": "Python Crash Course",
-        "Author": "Areeba",
-        "Year": 2024,
-        "Genre": "Coding",
-        "Read": true
+        "title": "Jannat kay pattay",
+        "author": "Nimrah ahmed",
+        "year": 2000,
+        "genre": "fiction",
+        "read": true
+    },
+    {
+        "title": "Mala",
+        "author": "Nimrah ahmed",
+        "year": 2023,
+        "genre": "",
+        "read": false
+    },
+    {
+        "title": "Jannat kay pattay",
+        "author": "Nimrah Ahmed",
+        "year": 2000,
+        "genre": "fiction",
+        "read": true
     }
 ]

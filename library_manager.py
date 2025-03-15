@@ -1,105 +1,128 @@
+# Description: A simple library management system that allows users to add, remove, search, and display books in a library.
+
 import json
 import os
 
-data_file = 'library.txt'
+# File to store the library data
+
+LIBRARY_FILE = "library.txt"
 
 def load_library():
-    if os.path.exists(data_file):
-        with open(data_file, 'r') as file:
-            return json.load(file)
-    return []   
+    """🔎 Load the library from a library.txt file."""
+    if os.path.exists(LIBRARY_FILE):
+        try:
+            with open(LIBRARY_FILE, "r") as file:
+                return json.load(file)
+        except json.JSONDecodeError:
+            return []
+    return []
 
 def save_library(library):
-    with open(data_file, 'w') as file:
-        json.dump(library, file)
+    """Save the library to a library.txt file."""
+    with open(LIBRARY_FILE, "w") as file:
+        json.dump(library, file, indent=4)
 
-def add_book(library):
-    title = input('✅ Enter the title of the book 📖 : ')
-    author = input('✅ Enter the author of the book 📔 : ')
-    year = input('✅ Enter the year of the book 📗 : ')
-    genre = input('✅ Enter the genre of the book 📕 : ')
-    read = input('🔔 Have you read the book 📗? (yes/no) : ').lower() == 'yes'
+# Load existing library data
+
+library = load_library()
+
+def add_book():
+    """Add a new book to the library."""
+    title = input("✅ Enter the book title 📖 : ").strip()
+    author = input("✅ Enter the author 📔 : ").strip()
+    year = input("✅ Enter the publication year 📗 : ").strip()
+    genre = input("✅ Enter the genre 📕 : ").strip()
+    read_status = input("🔔 Have you read this book? (yes/no) 📗 : ").strip().lower() == "yes"
 
     new_book = {
-        'title': title,
-        'author': author,
-        'year': year,
-        'genre': genre,
-        'read' : read
+        "title": title,
+        "author": author,
+        "year": int(year),
+        "genre": genre,
+        "read": read_status,
     }
 
     library.append(new_book)
     save_library(library)
-    print(f'📗 Book {title} added successfully 🤗!.')
+    print(f"\n✅ '{title}' by {author} added successfully🤗!\n")
 
-def remove_book(library):
-    title = input("✅ Enter the title of book to remove from the library 📚 :")   
-    initial_length = len(library)
-    library = [book for book in library if book['title'].lower() != title]
-    if len(library) < initial_length:
+def remove_book():
+    """Remove a book from the library by title."""
+    title = input("✅ Enter the title of the book to remove: ").strip()
+    global library
+    updated_library = [book for book in library if book["title"].lower() != title.lower()]
+
+    if len(updated_library) < len(library):
+        library = updated_library
         save_library(library)
-        print(f'Book {title} removed successfully.')
+        print(f"\n✅ '{title}' removed successfully!\n")
     else:
-        print(f'Book 📗 {title} not found in the library🙁')
- 
-def search_library(library):
-    search_by = input("🔎 Search by title or author: ").lower()
-    search_term = input(f"Enter the {search_by}: ").lower()
+        print("\n⚠️ Book not found in the library.\n")
 
-    results = [book for book in library if search_term in book[search_by].lower()]
+def search_books():
+    """🔎 Search for a book by title or author."""
+    search_query = input("\n\t 📖 Enter title or author to search 📚 : ").strip().lower()
+    results = [book for book in library if search_query in book["title"].lower() or search_query in book["author"].lower()]
 
     if results:
+        print("\n📖 Matching Books:")
         for book in results:
-            status = "Read" if book['read'] else "Unread"
-            print(f"{book['title']} by {book['author']} - {book['year']} - {book['genre']} - {status}")
+            print(f"🔹 {book['title']} by {book['author']} ({book['year']}) - {book['genre']} - {'✅ Read' if book['read'] else '📌 Unread'}")
     else:
-        print(f"No books found matching '{search_term}' in the {search_by} field.")
+        print("\n⚠️ No matching books found.")
 
-def display_all_books(library):
-    if library:
-        for book in library:
-            status = "Read" if book['read'] else "Unread"
-            print(f"{book['title']} by {book['author']} - {book['year']} - {book['genre']} - {status}")
-    else:
-        print("The library is empty📦.")
+def display_books():
+    """📚 Display all books in the library."""
+    if not library:
+        print("\n📌 Your library is empty. Add some books first!📦 \n")
+        return
 
-def display_statistics(library):
+    print("\n📚 Your Library Collection:")
+    for index, book in enumerate(library, start=1):
+        print(f"{index}. 📖 {book['title']} by {book['author']} ({book['year']}) - {book['genre']} - {'✅ Read' if book['read'] else '📌 Unread'}")
+
+def display_statistics():
+    """Display statistics about the library."""
     total_books = len(library)
-    read_books = len([book for book in library if book['read']])
-    percentage_read =  (read_books / total_books) * 100 if total_books > 0 else 0
+    read_books = sum(1 for book in library if book["read"])
+    percentage_read = (read_books / total_books * 100) if total_books > 0 else 0
 
-    print(f"Total books: {total_books}")
-    print(f"Percentage read : {percentage_read:.2f}%")
+    print("\n📊 Library Statistics:")
+    print(f"📚 Total Books: {total_books}")
+    print(f"📖 Books Read: {read_books} ({percentage_read:.2f}%)")
 
+  
 def main():
-    library = load_library()
+    """Main function to run the menu-driven program."""
     while True:
         print("\n\t📖 Welcome to the Library Management System 📘")
         print("\n :Menu:")
         print("\n1️⃣   Add a book")
-        print("2️⃣   Remove a book")
-        print("3️⃣   Search the library")
-        print("4️⃣   Display all books")
-        print("5️⃣   Display statistics")
-        print("6️⃣   Exit")
-       
-        choice = input("\n🧧 Enter your choice: ")
-        if choice == '1':
-            add_book(library)
-        elif choice == '2':
-            remove_book(library)
-        elif choice == '3':
-            search_library(library)
-        elif choice == '4':
-            display_all_books(library)
-        elif choice == '5':
-            display_statistics(library)
-        elif choice == '6':
-            print("📚 Thank you for using the Library System! Goodbye 👋😇!")
-            break
-        else :
-            print("❌ Invalid choice. Please try again 🔎.")
+        print("2️⃣   Remove a Book")
+        print("3️⃣   Search for a Book")
+        print("4️⃣   Display All Books")
+        print("5️⃣   View Statistics")
+        print("6️   Exit")
 
-if __name__ == '__main__':
+        choice = input("\n🧧 Enter your choice:").strip()
+
+        if choice == "1":
+            add_book()
+        elif choice == "2":
+            remove_book()
+        elif choice == "3":
+            search_books()
+        elif choice == "4":
+            display_books()
+        elif choice == "5":
+            display_statistics()
+        elif choice == "6":
+            print("\n📂📚 Thank you for using the Library System! Goodbye 👋😇\n")
+            break
+        else:
+            print("\n❌Invalid choice. Please try again🔎!!!!\n")
+
+if __name__ == "__main__":
     main()
 
+# End of the program
