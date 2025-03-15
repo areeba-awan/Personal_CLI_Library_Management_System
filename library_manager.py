@@ -126,3 +126,6 @@ if __name__ == "__main__":
     main()
 
 # End of the program
+
+# Output:
+# 	📖 Welcome to the Library Management System 📘 
