@@ -7,6 +7,8 @@ import os
 
 LIBRARY_FILE = "library.txt"
 
+# Functions to load and save library data 
+
 def load_library():
     """🔎 Load the library from a library.txt file."""
     if os.path.exists(LIBRARY_FILE):
@@ -15,7 +17,9 @@ def load_library():
                 return json.load(file)
         except json.JSONDecodeError:
             return []
+        
     return []
+# Save the library data to a file
 
 def save_library(library):
     """Save the library to a library.txt file."""
@@ -34,6 +38,8 @@ def add_book():
     genre = input("✅ Enter the genre 📕 : ").strip()
     read_status = input("🔔 Have you read this book? (yes/no) 📗 : ").strip().lower() == "yes"
 
+# Add the new book to the library
+
     new_book = {
         "title": title,
         "author": author,
@@ -45,6 +51,8 @@ def add_book():
     library.append(new_book)
     save_library(library)
     print(f"\n✅ '{title}' by {author} added successfully🤗!\n")
+
+# Create a Function to Remove a book from the library
 
 def remove_book():
     """Remove a book from the library by title."""
@@ -59,6 +67,8 @@ def remove_book():
     else:
         print("\n⚠️ Book not found in the library.\n")
 
+# Create a Function to Search for a book in the library
+
 def search_books():
     """🔎 Search for a book by title or author."""
     search_query = input("\n\t 📖 Enter title or author to search 📚 : ").strip().lower()
@@ -71,6 +81,8 @@ def search_books():
     else:
         print("\n⚠️ No matching books found.")
 
+# Create a Function that Display all books in the library
+
 def display_books():
     """📚 Display all books in the library."""
     if not library:
@@ -80,6 +92,8 @@ def display_books():
     print("\n📚 Your Library Collection:")
     for index, book in enumerate(library, start=1):
         print(f"{index}. 📖 {book['title']} by {book['author']} ({book['year']}) - {book['genre']} - {'✅ Read' if book['read'] else '📌 Unread'}")
+
+# Create a Function to Display statistics about the library 
 
 def display_statistics():
     """Display statistics about the library."""
@@ -91,6 +105,7 @@ def display_statistics():
     print(f"📚 Total Books: {total_books}")
     print(f"📖 Books Read: {read_books} ({percentage_read:.2f}%)")
 
+# Create a Main Function to run the menu-driven program
   
 def main():
     """Main function to run the menu-driven program."""
@@ -105,6 +120,8 @@ def main():
         print("6️   Exit")
 
         choice = input("\n🧧 Enter your choice:").strip()
+
+# Implement the menu options
 
         if choice == "1":
             add_book()
@@ -121,6 +138,8 @@ def main():
             break
         else:
             print("\n❌Invalid choice. Please try again🔎!!!!\n")
+
+# Run the main function
 
 if __name__ == "__main__":
     main()
